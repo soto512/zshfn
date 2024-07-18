@@ -1,0 +1,4 @@
+dps(){
+	docker ps -a
+}
+

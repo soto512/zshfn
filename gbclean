@@ -1,0 +1,8 @@
+#!/bin/bash
+
+gbclean(){
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    git commit -am "sTaSh" && git stash && git checkout main && \
+    git fetch origin && git rebase --rebase-merges origin/main && \
+    git branch -D $branch && git checkout -B $branch
+}

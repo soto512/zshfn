@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bencode(){
+  pbpaste | base64 | pbcopy
+}

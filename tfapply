@@ -1,0 +1,31 @@
+#!/bin/bash
+set -x
+
+tfapply(){
+  echo "Checking for tfswitch file"
+  if test -f ".tfswitchrc";
+    then
+      echo "Tfswitch file exists"
+      version=$(cat .tfswitchrc)
+      echo "Terraform Version: ${version}"
+      asdf shell terraform $version
+    else
+      echo "No tfswitch file exists"
+  fi
+  workspace=$(terraform workspace show)
+  echo "Workspace: ${workspace}\n"
+  if [ $workspace = "default" ];
+    then
+      echo "Workspace is default, continue? (y,n)"
+      read continue
+      if [ $continue = "y" ];
+        then
+          echo "Continuing..."
+          terraform apply ${*}
+        else
+          echo "Exiting..."
+      fi
+    else
+      terraform apply ${*}
+  fi
+}

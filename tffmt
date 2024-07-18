@@ -1,0 +1,16 @@
+#!/bin/bash
+set -x
+
+tffmt(){
+  echo "Checking for tfswitch file"
+  if test -f ".tfswitchrc";
+    then
+      echo "Tfswitch file exists"
+      version=$(cat .tfswitchrc)
+      echo "Terraform Version: ${version}"
+      asdf shell terraform $version
+    else
+      echo "No tfswitch file exists"
+  fi
+  terraform fmt ${*}
+}

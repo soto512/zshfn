@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bdecode(){
+  pbpaste | base64 --decode
+}
